@@ -4,7 +4,7 @@
   "description": "Node.js Rest APIs em Docker, com Express, Sequelize & MySQL",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Erro: nenhum teste especificado\" && exit 1"
   },
   "keywords": [
     "nodejs",
@@ -14,7 +14,7 @@
     "sequelize",
     "mysql"
   ],
-  "author": "bezkoder",
+  "author": "mafgomes",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
