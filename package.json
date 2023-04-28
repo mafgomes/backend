@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-express-sequelize-mysql",
+  "name": "Exemplo-backend-nodejs-express-sequelize-mysql-docker",
   "version": "1.0.0",
-  "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
+  "description": "Node.js Rest APIs em Docker, com Express, Sequelize & MySQL",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
