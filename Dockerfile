@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:18
 
 COPY . /usr/local/app
 RUN rm -rf .git* .env || true
