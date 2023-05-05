@@ -123,7 +123,8 @@ Para que passe a funcionar, é necessário, como um mínimo, que se faça três 
 
 ## Implementação _extra-petita_
 Além da implementação básica pedida no enunciado, no sentido de obter uma nota superior a 5.0, foram implementadas também as seguintes funcionalidades:
-- Try/Catch para prevenção de erros (na verdade, "coisa().then().catch()"); (+1 ponto);
+- Try/Catch para prevenção de erros (+1 ponto);
+  - Na verdade, foi usado "coisa().then().catch()", ao invés de try/catch;
 - Adicionar Middleware em uma ou mais rotas (+1 ponto);
   - O middleware implementa o versionamento de endpoints;
   - A parte do path /v1.0 é devida à chamada ```app.use('/v1.0', router);```
@@ -141,15 +142,17 @@ Além da implementação básica pedida no enunciado, no sentido de obter uma no
 - Uso de HTTPS, com certificado emitido por uma autoridade certificadora gratuita, LetsEncrypt (? pontos)
 - Isolamento dos serviços em contêineres Docker, inclusive com o orquestrador docker-compose (? pontos)
 
-#### Implementações futuras, para o curto prazo:
+### Implementações futuras
+#### De curto prazo:
+- Monitoramento (rudimentar, em console.log: +0,5 pontos);
+  - A ideia é implementar em middleware, evitando repetição de código que depois teria mesmo de ser removido dos fontes, quando da implantação de um Prometheus da vida.
 - Usar o bcrypt para criptografar senhas com salt (+1 ponto);
 - Usar token JWT no middleware para validar acesso (+1 ponto);
 
-#### Implementações futuras, de médio prazo:
+#### De médio prazo:
 - Usar testes unitários (+1 ponto);
 - Monitoramento (recomendado, usando Prometheus: +2 pontos);
 - Adicionar ESLint para padronizar code style no projeto (+1 ponto);
 
 #### Sem previsão de implementação:
-- Monitoramento (rudimentar, em console.log: +0,5 pontos);
 - Monitoramento (simples, jogando para um arquivo: +1 ponto);
