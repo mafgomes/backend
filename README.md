@@ -166,6 +166,8 @@ Além da implementação básica pedida no enunciado, no sentido de obter uma no
 - Usar rotas adicionais com PUT, PATCH e DELETE para alterar informações do banco (+2 ponto);
   - Apenas PATCH e DELETE foram implementadas a mais, não PUT;
   - Mas também foi implementada funcionalidade não especificada (procura por livros publicados);
+- Monitoramento (rudimentar, em console.log: +0,5 pontos);
+  - Foi implementado em middleware, evitando repetição de código que depois terá mesmo de ser removido dos fontes, quando da implantação de um Prometheus da vida.
 
 ### Implementações adicionais não previstas como pontuação adicional
 - Servidor web nginx como frontend, isolando as páginas web propriamente ditas dos endpoints web (? pontos)
@@ -176,8 +178,6 @@ Além da implementação básica pedida no enunciado, no sentido de obter uma no
 
 ### Implementações futuras
 #### De curto prazo:
-- Monitoramento (rudimentar, em console.log: +0,5 pontos);
-  - A ideia é implementar em middleware, evitando repetição de código que depois teria mesmo de ser removido dos fontes, quando da implantação de um Prometheus da vida.
 - Usar o bcrypt para criptografar senhas com salt (+1 ponto);
 - Usar token JWT no middleware para validar acesso (+1 ponto);
 
