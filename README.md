@@ -9,6 +9,13 @@ Aluno Marcelo Amarante Ferreira Gomes (Matrícula 2373171024)
 O artigo que inspirou a implementação contida nesse trabalho, bem como link para o repositório original, está disponível no seguinte link:
 - [Build Node.js Rest APIs with Express, Sequelize & MySQL](https://www.bezkoder.com/node-js-express-sequelize-mysql/)
 
+### Sobre o histórico de commits (git log)
+Esse repositório foi criado a partir de um repositório privado, do qual não consegui mudar a visibilidade para público, já que ele era derivado (fork) do repositório cujo link está no artigo original.
+
+Descobri hoje que o GitHub não permite a mudança de visibilidade (privado -> público), segundo ele, por motivos de segurança. Portanto, não consigo lhe conceder acesso nesse momento ao histórico de commits (git log).
+
+No entanto, se for desejável dar uma olhada no histórico de commits, posso adicionar seu usuário do GitHub como colaborador no repositório privado original, que ainda não apaguei. Para tanto, basta entrar em contato comigo, informando o seu login no GitHub.
+
 ## Arquitetura do projeto
 Esse trabalho foi implementado-se utilizando as seguintes tecnologias:
 - Node.js
@@ -62,7 +69,7 @@ Os métodos implementados incluem GET, POST, PATCH, e DELETE, sendo que há vari
      - Remove todos os cadastros de todos os livros cadastrados no banco.
 
 ## Acesso à implementação de referência
-Os fontes aqui disponíveis foram implementados, e está disponíveis para execução pública no site da [Mozbra Soluções](https://mozbra.com.br/), na URL [https://mozbra.com.br/iesb/v1.0/](https://mozbra.com.br/iesb/v1.0/).
+Os fontes aqui disponíveis foram implementados, e estão disponíveis para execução pública no site da [Mozbra Soluções](https://mozbra.com.br/), na URL [https://mozbra.com.br/iesb/v1.0/](https://mozbra.com.br/iesb/v1.0/).
 
 Por pura falta de tempo, não foi implementado controle de acesso, então qualquer um com os links e a documentação aqui descrita poderá testar, bastando introduzir a URL-base acima em algum software de teste de API, tal como o [Postman](https://www.postman.com/downloads/), e experimentar à vontade.
 
@@ -75,20 +82,17 @@ Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, 
 | DB_HOST		| Nome da máquina que hospeda o banco |
 | DB_ROOT_USER		| Nome do superusuário do banco |
 | DB_ROOT_PASSWORD	| Senha do superusuário do banco |
+| DB_IESB_DATABASE	| Nome do banco usado nessa API (já que, em princípio, teríamos 2 APIs) |
 | DB_LOCAL_PORT		| Número da porta do hospedeiro redirecionada para a do contêiner |
 | DB_DOCKER_PORT	| Número da porta no contêiner onde o Mysql ouvirá conexões |
 | | |
-| DB_IESB_DATABASE	| Nome do banco usado nessa API (já que temos 2 APIs) |
-| DB_IESB_USER		| Nome do usuário do banco|
-| DB_IESB_PASSWORD	| Senha do usuário do banco |
+| NODE_LOCAL_PORT	| Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| NODE_DOCKER_PORT	| Número da porta onde o node.js ouvirá conexões |
 | | |
-| NODE_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
-| NODE_DOCKER_PORT	|Número da porta onde o node.js ouvirá conexões |
-| | |
-| HTTP_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
-| HTTP_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTP (tipicamente 80) |
-| HTTPS_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
-| HTTPS_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTPS (tipicamente 443) |
+| HTTP_LOCAL_PORT	| Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| HTTP_DOCKER_PORT	| Número da porta onde o nginx ouvirá conexões HTTP (tipicamente 80) |
+| HTTPS_LOCAL_PORT	| Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| HTTPS_DOCKER_PORT	| Número da porta onde o nginx ouvirá conexões HTTPS (tipicamente 443) |
 
 ### Preparação para a execução
 Antes de ser possível criar as imagens dos contêineres, temos que baixar os módulos de Node dos quais o projeto depende.
@@ -117,10 +121,27 @@ contêineres, teclando Ctrl-C, e executar novamente, dessa vez em _background_:
 ^C
 docker-compose up -d
 ```
-Da forma como foi implementado o projeto, na primeira execução, o banco de dados será criado zerado (sem tabelas ou registros), e o usuário poderá populá-lo utilizando métodos POST.
+O primeiro contêiner a ser criado é o do banco de dados. Após sua criação, e mesmo antes de que os demais contêineres estejam prontos para funcionar, você já pode utilizar os comandos abaixo para criar o banco.
+```
+docker exec -it backend-db-1 bash
+mysql -p
+(digite a senha do usuário root)
+create database [coloque aqui o nome do database, como definido na variável DB_IESB_DATABASE];
+\q
+exit
+```
+Depois disso, será possivel executar
+```
+docker-compose down
+docker-compose up
+```
+Isso irá apagar o contêiner de banco de dados, bem como os demais contêineres, se já tiverem sido criados, e os recriará.
+
+Da forma como foi implementado o projeto, nesse momento, as tabelas do banco pertinentes serão criadas zeradas (sem registro algum), e o usuário poderá populá-lo utilizando métodos POST.
 
 ## Observações importantes
 Da forma como é distribuído no GitHub, esse projeto **NÃO** funciona!
+
 Para que passe a funcionar, é necessário, como um mínimo, que se faça três coisas:
 1) Copiar o arquivo exemplo.env com o nome de .env, e editá-lo para corresponder à sua configuração;
 2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado; em particular, repare que há DUAS entradas apontando para contêineres em Node.js, uma para essa API do trabalho da matéria do IESB, e outra para a API da própria Mozbra, trabalho ainda em andamento; para rodar apenas essa API, remova a seção relativa à API da Mozbra.
@@ -132,7 +153,7 @@ Para que passe a funcionar, é necessário, como um mínimo, que se faça três 
   - Implementado conforme pedido;
 - Instruções de criação de um banco PostgreSQL (criação de usuário, banco e tabelas) precisas de forma a subir um banco que pode ser acessado a partir da sua API de acordo com o projeto;
   - O banco implementado foi o MySQL, não PostgreSQL;
-  - Não há necessidade de criação do banco, já que é utilizada a biblioteca Sequelize, que, da forma como implementada aqui, inicializa o banco;
+  - Não há necessidade de criação das tabelas, já que é utilizada a biblioteca Sequelize, que inicializa as tabelas; a única criação necessária é do banco em si (create database ...);
 - Requisições usando métodos HTTP GET e POST obtendo e inserindo dados em um banco de dados (preferencialmente PostgreSQL, podendo ser outro do domínio do aluno);
   - Implementado conforme pedido, exceto pelo fato de ter sido empregado o MySQL, ao invés do PostgreSQL;
 - Projeto deve rodar sem erros na execução normal (enviando os dados esperados e recebendo os dados esperados de retorno);
