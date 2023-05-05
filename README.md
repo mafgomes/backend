@@ -22,6 +22,8 @@ Esse trabalho foi implementado-se utilizando as seguintes tecnologias:
 
 O projeto está implementado em contêineres Docker, com a seguinte estrutura:
 - backend-iesb: a implementação da API pedida no enunciado
+- backend-app: a implementação de **outra** API, não pedida no enunciado, e não contida nesse repositório
+  - a versão do docker-compose desse repositório não contempla esse contêiner
 - backend-mysqldb: o banco que armazena os dados necessários à aplicação
 - backend-nginx: um servidor web, desempenhando duas funções:
   - servir páginas estáticas e outras partes de um site hospedado no mesmo host;
