@@ -30,7 +30,7 @@ O projeto está implementado em contêineres Docker, com a seguinte estrutura:
   - atuar como um frontend, implementando a criptografia HTTPS.
 
 ## Métodos implementados
-Os métodos implementados incluem GET, POST, PUT, e DELETE, sendo que há variantes para alguns deles, conforme documentado a seguir:
+Os métodos implementados incluem GET, POST, PATCH, e DELETE, sendo que há variantes para alguns deles, conforme documentado a seguir:
 -    POST	/iesb/v1.0/
      - Cadastra um livro, a partir de um JSON, no formato a seguir. O único campo obrigatório é "titulo". Mas repare que é sem acentuação: "titulo", ao invés de "título"!
 ```
@@ -52,7 +52,7 @@ Os métodos implementados incluem GET, POST, PUT, e DELETE, sendo que há varian
      - Lista todos os livros publicados ("publicado": "true")
 -    GET	/iesb/v1.0/:id
      - Retorna as informações do livro de id informado
--    PUT	/iesb/v1.0/:id
+-    PATCH	/iesb/v1.0/:id
      - Atualiza as informações do livro de id informado com as informações contidas no corpo da requisição.
      - Somente os campos informados serão atualizados; os demais campos manterão seus valores atuais.
      - Não é possível alterar os campos automaticamente criados (id e datas de cadastro e de alteração).
@@ -150,7 +150,7 @@ Além da implementação básica pedida no enunciado, no sentido de obter uma no
 - Subir e configurar um banco de dados na AWS RDS ou serviço similar (Oracle Cloud, GCP, Azure, etc) (+1 ponto);
   - Na verdade, o banco foi configurado na Oracle Cloud, mas num contêiner à parte, na mesma VM;
 - Usar rotas adicionais com PUT, PATCH e DELETE para alterar informações do banco (+2 ponto);
-  - Apenas PUT e DELETE foram implementadas a mais, não PATCH;
+  - Apenas PATCH e DELETE foram implementadas a mais, não PUT;
   - Mas também foi implementada funcionalidade não especificada (procura por livros publicados);
 
 ### Implementações adicionais não previstas como pontuação adicional

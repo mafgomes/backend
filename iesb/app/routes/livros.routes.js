@@ -16,7 +16,7 @@ module.exports = app => {
   router.get("/:id", livros.findOne);
 
   // Update a Book with id
-  router.put("/:id", livros.update);
+  router.patch("/:id", livros.update);
 
   // Delete a Book with id
   router.delete("/:id", livros.delete);
