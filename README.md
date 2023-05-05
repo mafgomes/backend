@@ -120,3 +120,36 @@ Para que passe a funcionar, é necessário, como um mínimo, que se faça três 
 1) Copiar o arquivo exemplo.env com o nome de .env, e editá-lo para corresponder à sua configuração;
 2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado; em particular, repare que há DUAS entradas apontando para contêineres em Node.js, uma para essa API do trabalho da matéria do IESB, e outra para a API da própria Mozbra, trabalho ainda em andamento; para rodar apenas essa API, remova a seção relativa à API da Mozbra.
 3) Criar a pasta letsencrypt, sob a pasta nginx, contendo os certificados (com as chaves privadas) emitidos pela certificadora LetsEncrypt.
+
+## Implementação _extra-petita_
+Além da implementação básica pedida no enunciado, no sentido de obter uma nota superior a 5.0, foram implementadas também as seguintes funcionalidades:
+- Try/Catch para prevenção de erros (na verdade, "coisa().then().catch()"); (+1 ponto);
+- Adicionar Middleware em uma ou mais rotas (+1 ponto);
+  - O middleware implementa o versionamento de endpoints;
+  - A parte do path /v1.0 é devida à chamada ```app.use('/v1.0', router);```
+- Usar módulos na aplicação - outros arquivos além de um index.js com funções sendo chamadas (+1 ponto);
+- Subir e configurar um banco de dados na AWS RDS ou serviço similar (Oracle Cloud, GCP, Azure, etc) (+1 ponto);
+  - Na verdade, o banco foi configurado na Oracle Cloud, mas num contêiner à parte, na mesma VM;
+- Usar rotas adicionais com PUT, PATCH e DELETE para alterar informações do banco (+2 ponto);
+  - Apenas PUT e DELETE foram implementadas a mais, não PATCH;
+  - Mas também foi implementada funcionalidade não especificada (procura por livros publicados);
+
+### Implementações adicionais não previstas como pontuação adicional
+- Servidor web nginx como frontend, isolando as páginas web propriamente ditas dos endpoints web (? pontos)
+  - Esse frontend nginx também serviu para isolar a API apresentada como trabalho do IESB da API sendo implementada no ambiente de testes da empresa hospedeira, Mozbra Soluções;
+- Registro de nomes de domínio (mozbra.com.br e www.mozbra.com.br) no registro.br (? pontos)
+- Uso de HTTPS, com certificado emitido por uma autoridade certificadora gratuita, LetsEncrypt (? pontos)
+- Isolamento dos serviços em contêineres Docker, inclusive com o orquestrador docker-compose (? pontos)
+
+#### Implementações futuras, para o curto prazo:
+- Usar o bcrypt para criptografar senhas com salt (+1 ponto);
+- Usar token JWT no middleware para validar acesso (+1 ponto);
+
+#### Implementações futuras, de médio prazo:
+- Usar testes unitários (+1 ponto);
+- Monitoramento (recomendado, usando Prometheus: +2 pontos);
+- Adicionar ESLint para padronizar code style no projeto (+1 ponto);
+
+#### Sem previsão de implementação:
+- Monitoramento (rudimentar, em console.log: +0,5 pontos);
+- Monitoramento (simples, jogando para um arquivo: +1 ponto);
