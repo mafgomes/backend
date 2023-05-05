@@ -19,10 +19,10 @@ const db = require("./app/models");
 
 db.sequelize.sync()
   .then(() => {
-    console.log("Synced db.");
+    console.log("Banco sincronizado.");
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
+    console.log("Erro ao sincronizar o banco: " + err.message);
   });
 
 // // drop the table if it already exists
@@ -35,10 +35,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Bem-vindo ao teste de backend" });
 });
 
-require("./app/routes/tutorial.routes")(app);
+require("./app/routes/livros.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Serviço rodando na porta ${PORT}.`);
 });
