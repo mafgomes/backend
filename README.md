@@ -70,20 +70,23 @@ Certifique-se de ler esse README por inteiro. Em especial, não deixe de ler a s
 Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, um arquivo chamado ".env" (sem as aspas), no qual deverão estar declarados parâmetros como os do arquivo "exemplo.env":
 | Variável		|Descrição|
 |:----------------------|:--------|
-| MYSQLDB_USER		|Nome do usuário do banco|
-| MYSQLDB_ROOT_PASSWORD	|Senha do usuário do banco|
-| MYSQLDB_HOST		|Nome da máquina que hospeda o banco|
-| MYSQLDB_DATABASE	|Nome pelo qual o banco conhece a si mesmo|
-| MYSQLDB_LOCAL_PORT	|Número da porta do hospedeiro redirecionada para a do contêiner|
-| MYSQLDB_DOCKER_PORT	|Número da porta no contêiner onde o Mysql ouvirá conexões|
+| DB_HOST		| Nome da máquina que hospeda o banco |
+| DB_ROOT_USER		| Nome do superusuário do banco |
+| DB_ROOT_PASSWORD	| Senha do superusuário do banco |
+| DB_LOCAL_PORT		| Número da porta do hospedeiro redirecionada para a do contêiner |
+| DB_DOCKER_PORT	| Número da porta no contêiner onde o Mysql ouvirá conexões |
 | | |
-| NODE_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner|
-| NODE_DOCKER_PORT	|Número da porta onde o node.js ouvirá conexões|
+| DB_IESB_DATABASE	| Nome do banco usado nessa API (já que temos 2 APIs) |
+| DB_IESB_USER		| Nome do usuário do banco|
+| DB_IESB_PASSWORD	| Senha do usuário do banco |
 | | |
-| HTTP_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner|
-| HTTP_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTP (tipicamente 80)|
-| HTTPS_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner|
-| HTTPS_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTPS (tipicamente 443)|
+| NODE_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| NODE_DOCKER_PORT	|Número da porta onde o node.js ouvirá conexões |
+| | |
+| HTTP_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| HTTP_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTP (tipicamente 80) |
+| HTTPS_LOCAL_PORT	|Número da porta do hospedeiro a ser redirecionada para a do contêiner |
+| HTTPS_DOCKER_PORT	|Número da porta onde o nginx ouvirá conexões HTTPS (tipicamente 443) |
 
 ### Preparação para a execução
 Antes de ser possível criar as imagens dos contêineres, temos que baixar os módulos de Node dos quais o projeto depende.
@@ -138,9 +141,9 @@ Além da implementação básica pedida no enunciado, no sentido de obter uma no
 ### Implementações adicionais não previstas como pontuação adicional
 - Servidor web nginx como frontend, isolando as páginas web propriamente ditas dos endpoints web (? pontos)
   - Esse frontend nginx também serviu para isolar a API apresentada como trabalho do IESB da API sendo implementada no ambiente de testes da empresa hospedeira, Mozbra Soluções;
+- Isolamento dos serviços em contêineres Docker, inclusive com o orquestrador docker-compose (? pontos)
 - Registro de nomes de domínio (mozbra.com.br e www.mozbra.com.br) no registro.br (? pontos)
 - Uso de HTTPS, com certificado emitido por uma autoridade certificadora gratuita, LetsEncrypt (? pontos)
-- Isolamento dos serviços em contêineres Docker, inclusive com o orquestrador docker-compose (? pontos)
 
 ### Implementações futuras
 #### De curto prazo:
