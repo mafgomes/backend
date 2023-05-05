@@ -1,3 +1,6 @@
 node_modules
 package-lock.json
-.env
+
+# Sigilos:
+.env # nomes de hosts e credenciais de aceso a banco, etc.
+letsencrypt # chaves privadas de criptografia para HTTPS
