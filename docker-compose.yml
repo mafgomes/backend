@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+
+  # Esse serviço usa uma imagem padrão de MySQL
+  db:
+    image: mysql:8.0.32-debian
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Nesse serviço, a imagem do Node.js padrão é usada,
+  # juntamente com os fontes que implementam a API desejada
+  app:
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    build: ./appNode
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=db
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD", "bash" ,"-c", "ps ax | grep node | grep -v grep"]
+      timeout: 2s
+      retries: 10
+
+  # Nesse serviço, são acrescentados à imagem padrão do nginx 
+  # apenas o diretório letsencrypt, como subdiretório de /etc,
+  # onde são armazenadas as informações acerca da chave privada
+  # de encriptação para HTTPS, emitidas GRATUITAMENTE pela
+  # certificadora Let's Encrypt (https://letsencrypt.org),
+  # o aplicativo certbot, utilizado para renovar os certificados,
+  # e o arquivo de configuração do próprio nginx, localizado em
+  # /etc/nginx/conf.d/mozbra.conf
+  # Por fim, é apagada a configuração default do nginx, de
+  # /etc/nginx/conf.d/default.conf
+  web:
+    depends_on:
+      app:
+        condition: service_healthy
+        restart: true
+    build: ./nginx
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $HTTP_LOCAL_PORT:$HTTP_DOCKER_PORT
+      - $HTTPS_LOCAL_PORT:$HTTPS_DOCKER_PORT
+    stdin_open: true
+    tty: true
+    volumes:
+      - web:/usr/share/nginx/html
+
+volumes: 
+  db:
+  web:
