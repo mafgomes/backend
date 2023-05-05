@@ -69,7 +69,7 @@ Certifique-se de ler esse README por inteiro. Em especial, não deixe de ler a s
 
 Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, um arquivo chamado ".env" (sem as aspas), no qual deverão estar declarados parâmetros como os do arquivo "exemplo.env":
 | Variável		|Descrição|
-|:----------------------|:--------|
+|:---------------------:|:-------:|
 | DB_HOST		| Nome da máquina que hospeda o banco |
 | DB_ROOT_USER		| Nome do superusuário do banco |
 | DB_ROOT_PASSWORD	| Senha do superusuário do banco |
@@ -124,7 +124,20 @@ Para que passe a funcionar, é necessário, como um mínimo, que se faça três 
 2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado; em particular, repare que há DUAS entradas apontando para contêineres em Node.js, uma para essa API do trabalho da matéria do IESB, e outra para a API da própria Mozbra, trabalho ainda em andamento; para rodar apenas essa API, remova a seção relativa à API da Mozbra.
 3) Criar a pasta letsencrypt, sob a pasta nginx, contendo os certificados (com as chaves privadas) emitidos pela certificadora LetsEncrypt.
 
-## Implementação _extra-petita_
+## Critérios de pontuação do trabalho
+### Requisitos mínimos para aprovação (nota 5.0):
+- API preferencialmente usando Node.js com Express.js funcionando sem erros (ou outra linguagem/framework com instruções de execução no Readme.md);
+  - Implementado conforme pedido;
+- Instruções de criação de um banco PostgreSQL (criação de usuário, banco e tabelas) precisas de forma a subir um banco que pode ser acessado a partir da sua API de acordo com o projeto;
+  - O banco implementado foi o MySQL, não PostgreSQL;
+  - Não há necessidade de criação do banco, já que é utilizada a biblioteca Sequelize, que, da forma como implementada aqui, inicializa o banco;
+- Requisições usando métodos HTTP GET e POST obtendo e inserindo dados em um banco de dados (preferencialmente PostgreSQL, podendo ser outro do domínio do aluno);
+  - Implementado conforme pedido, exceto pelo fato de ter sido empregado o MySQL, ao invés do PostgreSQL;
+- Projeto deve rodar sem erros na execução normal (enviando os dados esperados e recebendo os dados esperados de retorno);
+  - Até onde consegui testar, o projeto executa a contento, apresentando erros apenas quando se informa parâmetros incorretos.
+  - Ainda que com parâmetros errados, ele reporta os erros de forma apropriada, com os códigos de erro HTTP corretos.
+
+### Implementação _extra-petita_
 Além da implementação básica pedida no enunciado, no sentido de obter uma nota superior a 5.0, foram implementadas também as seguintes funcionalidades:
 - Try/Catch para prevenção de erros (+1 ponto);
   - Na verdade, foi usado "coisa().then().catch()", ao invés de try/catch;
