@@ -9,13 +9,6 @@ Aluno Marcelo Amarante Ferreira Gomes (Matrícula 2373171024)
 O artigo que inspirou a implementação contida nesse trabalho, bem como link para o repositório original, está disponível no seguinte link:
 - [Build Node.js Rest APIs with Express, Sequelize & MySQL](https://www.bezkoder.com/node-js-express-sequelize-mysql/)
 
-### Sobre o histórico de commits (git log)
-Esse repositório foi criado a partir de um repositório privado, do qual não consegui mudar a visibilidade para público, já que ele era derivado (fork) do repositório cujo link está no artigo original.
-
-Descobri hoje que o GitHub não permite a mudança de visibilidade (privado -> público), segundo ele, por motivos de segurança. Portanto, não consigo lhe conceder acesso nesse momento ao histórico de commits (git log).
-
-No entanto, se for desejável dar uma olhada no histórico de commits, posso adicionar seu usuário do GitHub como colaborador no repositório privado original, que ainda não apaguei. Para tanto, basta entrar em contato comigo, informando o seu login no GitHub.
-
 ## Arquitetura do projeto
 Esse trabalho foi implementado-se utilizando as seguintes tecnologias:
 - Node.js
