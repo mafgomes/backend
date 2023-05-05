@@ -118,5 +118,5 @@ Da forma como foi implementado o projeto, na primeira execução, o banco de dad
 Da forma como é distribuído no GitHub, esse projeto **NÃO** funciona!
 Para que passe a funcionar, é necessário, como um mínimo, que se faça três coisas:
 1) Copiar o arquivo exemplo.env com o nome de .env, e editá-lo para corresponder à sua configuração;
-2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado;
+2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado; em particular, repare que há DUAS entradas apontando para contêineres em Node.js, uma para essa API do trabalho da matéria do IESB, e outra para a API da própria Mozbra, trabalho ainda em andamento; para rodar apenas essa API, remova a seção relativa à API da Mozbra.
 3) Criar a pasta letsencrypt, sob a pasta nginx, contendo os certificados (com as chaves privadas) emitidos pela certificadora LetsEncrypt.
