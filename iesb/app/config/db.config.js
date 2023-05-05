@@ -2,10 +2,10 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 module.exports = {
-  HOST: process.env.MYSQLDB_USER,
-  USER: process.env.MYSQLDB_HOST,
-  PASSWORD: process.env.MYSQLDB_PASSWORD,
-  DB: process.env.MYSQLDB_DATABASE,
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_ROOT_USER,
+  PASSWORD: process.env.DB_ROOT_PASSWORD,
+  DB: process.env.DB_IESB_DATABASE,
   dialect: "mysql",
   pool: {
     max: 5,
