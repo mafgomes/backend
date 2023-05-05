@@ -1,6 +1,8 @@
 # Trabalho final da disciplina de Backend
 Pós-graduação em desenvolvimento para plataformas móveis
+
 IESB, curso de 2023-1, Prof. Felipe Reimer
+
 Aluno Marcelo Amarante Ferreira Gomes (Matrícula 2373171024)
 
 ## Introdução
@@ -64,6 +66,7 @@ Por pura falta de tempo, não foi implementado controle de acesso, então qualqu
 
 ## Configuração do projeto
 Certifique-se de ler esse README por inteiro. Em especial, não deixe de ler a seção **Observações Importantes**.
+
 Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, um arquivo chamado ".env" (sem as aspas), no qual deverão estar declarados parâmetros como os do arquivo "exemplo.env":
 | Variável		|Descrição|
 |:----------------------|:--------|
