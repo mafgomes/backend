@@ -21,7 +21,7 @@ Esse trabalho foi implementado-se utilizando as seguintes tecnologias:
 - Docker-compose (orquestração dos contêineres)
 
 O projeto está implementado em contêineres Docker, com a seguinte estrutura:
-- backend-app: a implementação da API pedida no enunciado
+- backend-iesb: a implementação da API pedida no enunciado
 - backend-mysqldb: o banco que armazena os dados necessários à aplicação
 - backend-nginx: um servidor web, desempenhando duas funções:
   - servir páginas estáticas e outras partes de um site hospedado no mesmo host;
@@ -29,7 +29,7 @@ O projeto está implementado em contêineres Docker, com a seguinte estrutura:
 
 ## Métodos implementados
 Os métodos implementados incluem GET, POST, PUT, e DELETE, sendo que há variantes para alguns deles, conforme documentado a seguir:
--    POST	/api/v1.0/
+-    POST	/iesb/v1.0/
      - Cadastra um livro, a partir de um JSON, no formato a seguir. O único campo obrigatório é "titulo". Mas repare que é sem acentuação: "titulo", ao invés de "título"!
 ```
         {
@@ -44,23 +44,23 @@ Os métodos implementados incluem GET, POST, PUT, e DELETE, sendo que há varian
        - id, um número sequencial com auto-incremento;
        - data de cadastro desse registro;
        - data da última alteração desse registro;
--    GET	/api/v1.0/
+-    GET	/iesb/v1.0/
      - Lista todos os livros cadastrados
--    GET	/api/v1.0/published
-     - Lista todos os livros cadastrados como publicados
--    GET	/api/v1.0/:id
+-    GET	/iesb/v1.0/publicados
+     - Lista todos os livros publicados ("publicado": "true")
+-    GET	/iesb/v1.0/:id
      - Retorna as informações do livro de id informado
--    PUT	/api/v1.0/:id
+-    PUT	/iesb/v1.0/:id
      - Atualiza as informações do livro de id informado com as informações contidas no corpo da requisição.
      - Somente os campos informados serão atualizados; os demais campos manterão seus valores atuais.
      - Não é possível alterar os campos automaticamente criados (id e datas de cadastro e de alteração).
--    DELETE	/api/v1.0/:id
+-    DELETE	/iesb/v1.0/:id
      - Remove o cadastro do livro de id informado.
--    DELETE	/api/v1.0/
+-    DELETE	/iesb/v1.0/
      - Remove todos os cadastros de todos os livros cadastrados no banco.
 
 ## Acesso à implementação de referência
-Os fontes aqui disponíveis foram implementados, e está disponíveis para execução pública no site da [Mozbra Soluções](https://mozbra.com.br/), na URL [https://mozbra.com.br/api/v1.0/](https://mozbra.com.br/api/v1.0/).
+Os fontes aqui disponíveis foram implementados, e está disponíveis para execução pública no site da [Mozbra Soluções](https://mozbra.com.br/), na URL [https://mozbra.com.br/iesb/v1.0/](https://mozbra.com.br/iesb/v1.0/).
 
 Por pura falta de tempo, não foi implementado controle de acesso, então qualquer um com os links e a documentação aqui descrita poderá testar, bastando introduzir a URL-base acima em algum software de teste de API, tal como o [Postman](https://www.postman.com/downloads/), e experimentar à vontade.
 
@@ -89,13 +89,13 @@ Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, 
 Antes de ser possível criar as imagens dos contêineres, temos que baixar os módulos de Node dos quais o projeto depende.
 Isso pode ser feito com esses comandos:
 ```
-cd appNode
+cd iesb
 npm install
 ```
 
 ## Execução do projeto
 Uma vez baixadas as dependências, já podemos fazer o compose.
-Mas antes, se você ainda estiver na pasta appNode, volte para a pasta principal do projeto:
+Mas antes, se você ainda estiver na pasta iesb, volte para a pasta principal do projeto:
 ```
 cd ..
 ```
