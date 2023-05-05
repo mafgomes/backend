@@ -69,7 +69,7 @@ Certifique-se de ler esse README por inteiro. Em especial, não deixe de ler a s
 
 Para se rodar o projeto, é necessário que exista, em sua raiz de diretórios, um arquivo chamado ".env" (sem as aspas), no qual deverão estar declarados parâmetros como os do arquivo "exemplo.env":
 | Variável		|Descrição|
-|:---------------------:|:-------:|
+|:----------------------|:--------|
 | DB_HOST		| Nome da máquina que hospeda o banco |
 | DB_ROOT_USER		| Nome do superusuário do banco |
 | DB_ROOT_PASSWORD	| Senha do superusuário do banco |
@@ -122,7 +122,7 @@ Da forma como é distribuído no GitHub, esse projeto **NÃO** funciona!
 Para que passe a funcionar, é necessário, como um mínimo, que se faça três coisas:
 1) Copiar o arquivo exemplo.env com o nome de .env, e editá-lo para corresponder à sua configuração;
 2) Editar o arquivo mozbra.conf (talvez renomeando-o, se desejado) para refletir o seu domínio registrado; em particular, repare que há DUAS entradas apontando para contêineres em Node.js, uma para essa API do trabalho da matéria do IESB, e outra para a API da própria Mozbra, trabalho ainda em andamento; para rodar apenas essa API, remova a seção relativa à API da Mozbra.
-3) Criar a pasta letsencrypt, sob a pasta nginx, contendo os certificados (com as chaves privadas) emitidos pela certificadora LetsEncrypt.
+3) Se for usado HTTPS, criar a pasta letsencrypt, sob a pasta nginx, contendo os certificados (com as respectivas chaves privadas) emitidos pela certificadora LetsEncrypt; alternativamente, para usar apenas HTTP, pode-se editar o docker-compose para usar a imagem padrão do nginx, mas mapeando os diretórios /etc/nginx/conf.d para apontar para uma pasta com arquivos de configuração que não usem HTTPS.
 
 ## Critérios de pontuação do trabalho
 ### Requisitos mínimos para aprovação (nota 5.0):
